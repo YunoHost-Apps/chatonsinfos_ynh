@@ -1,0 +1,4 @@
+#!/bin/bash
+
+source /usr/share/yunohost/helpers
+ynh_write_var_in_file --file="/var/www/chatonsinfo/public/${YNH_APP_INSTANCE_NAME}.properties" --key="service.website" --value="https://$YNH_APP_NEW_DOMAIN/$YNH_APP_NEW_PATH"
