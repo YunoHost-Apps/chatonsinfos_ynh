@@ -47,4 +47,4 @@ disk = "50M"
     [resources.install_dir]
     # This will create/remove the install dir as /var/www/$app
     # and store the corresponding setting $install_dir
-    dir = "/var/www/__APP__/sources/"
+    dir = "/var/www/__APP__/"

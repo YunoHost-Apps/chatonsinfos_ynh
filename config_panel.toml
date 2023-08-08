@@ -292,219 +292,148 @@ services = []
         type = "url"
 		bind = "organization.funding.custom"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        ########################################################################
-        #### ABOUT QUESTIONS
-        ########################################################################
-
-        ## A section is compound of one or several questions.
-
-        ## ---------------------------------------------------------------------
-        ## IMPORTANT: as for panel and section you have to choose an ID, but this
-        ## one should be unique in all this document, even if the question is in
-        ## an other panel.
-        ## ---------------------------------------------------------------------
-        
-        ## You can use same questions types and properties than in manifest.yml 
-        ## install part. However, in YNH 4.3, a lot of change has been made to
-        ## extend availables questions types list.
-        ## See: TODO DOC LINK
-        
-        [main.customization.project_name]
-        
-        ## (required) The ask property is equivalent to the ask property in 
-        ## the manifest. However, in config panels, questions are displayed on the
-        ## left side and therefore have less space to be rendered. Therefore, 
-        ## it is better to use a short question, and use the "help" property to
-        ## provide additional details if necessary.
-        ask.en = "Name of the project"
-
-        ## (required) The type property indicates how the question should be 
-        ## displayed, validated and managed. Some types have specific properties.
-        ## 
-        ## Types available: string, boolean, number, range, text, password, path
-        ## email, url, date, time, color, select, domain, user, tags, file.
-        ##
-        ## For a complete list with specific properties, see: TODO DOC LINK
+[host]
+name = "Hébergement"
+[host.provider]
+name = "Fournisseur"
+[host.provider.name]
+        ask.en = "Nom de l'hébergeur"
+		help.en = "Hébergeur de la machine qui fait tourner le service, dans le cas d'un auto-hébergement c'est vous !"
         type = "string"
-        
-        ########################################################################
-        #### ABOUT THE BIND PROPERTY
-        ########################################################################
+		bind = "host.name"
 
-        ## (recommended) 'bind' property is a powerful feature that let you 
-        ## configure how and where the data will be read, validated and written. 
+[host.provider.description]
+        ask.en = "Description"
+        type = "string"
+		bind = "host.description"
 
-        ## By default, 'bind property is in "settings" mode, it means it will 
-        ## **only** read and write the value in application settings file.
-        ## bind = "settings"
+# Si vous avez du mal à remplir les champs précédents, ce tableau pourra vous aider :
+#                  NANO    PHYSICAL    VIRTUAL    SHARED    CLOUD
+# HOME              pm        pm          vm      shared    cloud
+# HOSTEDBAY         pm        pm          vm      shared    cloud
+# HOSTEDSERVER      --        pm          vm      shared    cloud
+# OUTSOURCED        --        --         vps      shared    cloud
+# Légendes : pm : physical machine ; vm : virtual machine ; vps : virtual private server.
 
-        ## However, settings usually correspond to key/values in actual app configurations
-        ## Hence, a more useful mode is to have bind = ":FILENAME". In that case, YunoHost
-        ## will automagically find a line with "KEY=VALUE" in FILENAME
-        ## (with the adequate separator between KEY and VALUE)
-        ##
-        ## YunoHost will then use this value for the read/get operation.
-        ## During write/set operations, YunoHost will overwrite the value
-        ## in **both** FILENAME and in the app's settings.yml
+[host.provider.type]
+        ask.en = "Type d'hébergement"
+        type = "string"
+		choices.HOME = "hébergement à domicile"
+		choices.HOSTEDBAY = "serveur personnel hébergé dans une baie d'un fournisseur"
+		choices.HOSTEDSERVER = "serveur d'un fournisseur"
+		choices.OUTSOURCED = "infrastructure totalement sous-traitée"
+		bind = "host.provider.type"
 
-        ## Configuration file format supported: yaml, toml, json, ini, env, php,
-        ## python. The feature probably works with others formats, but should be tested carefully.
+[host.provider.hypervisor]
+        ask.en = "Nom de l'hyperviseur"
+		help.en = ""
+        type = "string"
+		optional = true
+		bind = "host.provider.hypervisor"
 
-        ## Note that this feature only works with relatively simple cases
-        ## such as `KEY: VALUE`, but won't properly work with
-        ## complex data structures like multilin array/lists or dictionnaries.
-        ## It also doesn't work with XML format, custom config function call, php define(), ...
+[host.provider.country-name]
+        ask.en = "Pays"
+		help.en = ""
+        type = "string"
+		bind = "host.country.name"
 
-        ## More info on TODO
-        # bind = ":/var/www/__APP__/settings.py"
+[host.provider.country-code]
+        ask.en = "Code Pays"
+		help = "Table ISO 3166-1 alpha-2 : https://fr.wikipedia.org/wiki/ISO_3166-1#Table_de_codage"
+        type = "string"
+		bind = "host.country.code"
+		default = "FR"
 
+[host.server.type]
+        ask.en = "Type de serveur"
+        type = "string"
+		choices.NANO = "nano-ordinateur (Raspberry Pi, Olimex…)"
+		choices.PHYSICAL = "machine physique"
+		choices.VIRTUAL = "machine virtuelle"
+		choices.SHARED = "hébergement mutualisé"
+		choices.CLOUD = "infrastructure multi-serveurs"
+		bind = "host.server.type"
 
-        ## By default, bind = ":FILENAME" will use the question ID as KEY
-        ## ... but the question ID may sometime not be the exact KEY name in the configuration file.
-        ## 
-        ## In particular, in pepettes, the python variable is 'name' and not 'project_name'
-        ## (c.f. https://github.com/YunoHost-Apps/pepettes_ynh/blob/5cc2d3ffd6529cc7356ff93af92dbb6785c3ab9a/conf/settings.py##L11 )
-        ##
-        ## In that case, the key name can be specified before the column ':'
-        
-        bind = "name:/var/www/__APP__/settings.py"
+[__APP__]
+[__APP__.service]
 
-        ## ---------------------------------------------------------------------
-        ## IMPORTANT: other 'bind' mode exists:
-        ## 
-        ## bind = "FILENAME" (with no column character before FILENAME)
-        ## may be used to bind to the **entire file content** (instead of a single KEY/VALUE)
-        ## This could be used to expose an entire configuration file, or binary files such as images
-        ## For example:
-        ## bind = "/var/www/__APP__/img/logo.png"
-        ##
-        ## bind = "null" can be used to disable reading / writing in settings.
-        ## This creates sort of a "virtual" or "ephemeral" question which is not related to any actual setting
-        ## In this mode, you are expected to define custom getter/setters/validators in scripts/config:
-        ##
-        ## getter: get__QUESTIONID()
-        ## setter: set__QUESTIONID()
-        ## validator: validate__QUESTIONID()
-        ##
-        ## You can also specify a common getter / setter / validator, with the 
-        ## function 'bind' mode, for example here it will try to run 
-        ## get__array_settings() first.
-        #  bind = "array_settings()"
-        ## ---------------------------------------------------------------------
-        
-        ## ---------------------------------------------------------------------
-        ## IMPORTANT: with the exception of bind=null questions,
-        ## question IDs should almost **always** correspond to an app setting
-        ## initialized / reused during install/upgrade.
-        ## Not doing so may result in inconsistencies between the config panel mechanism
-        ## and the use of ynh_add_config
-        ## ---------------------------------------------------------------------
+[__APP__.service.published]
+        ask.en = "Publié"
+		help.en = "Faut-il publier la fiche descriptive (.properties) du service ?"
+        type = "boolean"
 
-        ########################################################################
-        #### OTHER GENERIC PROPERTY FOR QUESTIONS
-        ########################################################################
-        
-        ## (optional) An help text for the question
-        help = "Fill the name of the project which will received donation"
+[__APP__.service.startdate]
+        ask.en = "Date d'ouverture"
+        type = "date"
+        bind = "service.startdate"
+        visible = "__APP__.service.published"
 
-        ## (optional) An example display as placeholder in web form
-        # example = "YunoHost"
+[__APP__.service.enddate]
+        ask.en = "Date de fermeture"
+        type = "date"
+		optional = true
+        bind = "service.enddate"
+        visible = "__APP__.service.published"
 
-        ## (optional) set to true in order to redact the value in operation logs
-        # redact = false
+[__APP__.service.description]
+        ask.en = "Description"
+        type = "string"
+		bind = "service.description"
+        visible = "__APP__.service.published"
 
-        ## (optional) for boolean questions you can specify replacement values 
-        ## bound to true and false, in case property is bound to config file
-        # useful if bound property in config file expects something else than integer 1
-        yes = "Enable" 
-        # useful if bound property in config file expects something else than integer 0
-        no = "Disable" 
-
-        ## (optional) A validation pattern
-        ## ---------------------------------------------------------------------
-        ## IMPORTANT: your pattern should be between simple quote, not double.
-        ## ---------------------------------------------------------------------
-        pattern.regexp = '^\w{3,30}$'
-        pattern.error = "The name should be at least 3 chars and less than 30 chars. Alphanumeric chars are accepted"
-
-        ## Note: visible and optional properties are also available for questions
-
-
-        [main.customization.contact_url]
-        ask = "Contact url"
+[__APP__.service.logo]
+        ask.en = "Logo"
         type = "url"
-        example = "mailto: contact@example.org"
-        help = "mailto: accepted"
-        pattern.regexp = '^mailto:[^@]+@[^@]+|https://$'
-        pattern.error = "Should be https or mailto:"
-        bind = ":/var/www/__APP__/settings.py"
+		bind = "service.logo"
+        visible = "__APP__.service.published"
 
-        [main.customization.logo]
-        ask = "Logo"
-        type = "file"
-        accept = ".png"
-        help = "Fill with an already resized logo"
-        bind = "__INSTALL_DIR__/img/logo.png"
-        
-        [main.customization.favicon]
-        ask = "Favicon"
-        type = "file"
-        accept = ".png"
-        help = "Fill with an already sized favicon"
-        bind = "__INSTALL_DIR__/img/favicon.png"
+[__APP__.service.legal-url]
+        ask.en = "Mentions légales"
+        type = "url"
+		bind = "service.legal.url"
+        visible = "__APP__.service.published"
 
-        
-    [main.stripe]
-    name = "Stripe general info"
-    optional = false
+[__APP__.service.guide-technical]
+        ask.en = "Documentation technique"
+        type = "url"
+		bind = "service.guide.technical"
+        visible = "__APP__.service.published"
 
-        # The next alert is overwrited with a getter from the config script
-        [main.stripe.amount]
-        ask = "Donation in the month : XX €
-        type = "alert"
-        style = "success"
+[__APP__.service.guide-user]
+        ask.en = "Documentation utilisateurices"
+        type = "url"
+		bind = "service.guide.user"
+        visible = "__APP__.service.published"
 
-        [main.stripe.publishable_key]
-        ask = "Publishable key"
+[__APP__.service.contact-url]
+        ask.en = "Page de support"
+        type = "url"
+		bind = "service.contact.url"
+        optional = true
+        visible = "__APP__.service.published"
+
+[__APP__.service.contact-email]
+        ask.en = "Courriel de support"
+        type = "email"
+		bind = "service.contact.email"
+        optional = true
+        visible = "__APP__.service.published"
+
+[__APP__.service.registration]
+        ask.en = "Inscription"
         type = "string"
-        redact = true
-        help = "Indicate here the stripe publishable key"
-        bind = ":/var/www/__APP__/settings.py"
+		choices.None = "Le service s'utilise sans inscription"
+		choices.Free = "Inscription nécessaire mais ouverte à tout le monde et gratuite"
+        choices.Member = "Inscription restreinte aux membres (la notion de membre pouvant être très relative, par exemple, une famille, un cercle d’amis, adhérents d'association…)"
+        choices.Client = "Inscription liée à une relation commerciale (facture…)" 
+		bind = "service.registration"
+        visible = "__APP__.service.published"
 
-        [main.stripe.secret_key]
-        ask = "Secret key"
+[__APP__.service.registration-load]
+        ask.en = "Capacité"
         type = "string"
-        redact = true
-        help = "Indicate here the stripe secret key"
-        bind = ":/var/www/__APP__/settings.py"
-        
-        [main.stripe.prices]
-        ask = "Prices ID"
-        type = "tags"
-        help = """\
-        Indicates here the prices ID of donation products you created in stripe interfaces. \
-        Go on [Stripe products](https://dashboard.stripe.com/products) to create those donation products. \
-        Fill it tag with 'FREQUENCY/CURRENCY/PRICE_ID' \
-        FREQUENCY: 'one_time' or 'recuring' \
-        CURRENCY: 'EUR' or 'USD' \
-        PRICE_ID: ID from stripe interfaces starting with 'price_' \
-        """
-        pattern.regexp = '^(one_time|recuring)/(EUR|USD)/price_.*$'
-        pattern.error = "Please respect the format describe in help text for each price ID"
+		choices.OPEN = "Le service accueille de nouveaux comptes"
+		choices.FULL = "Le service n'accueille plus de nouveau compte pour l'instant"
+		bind = "service.registration.load"
+        visible = "__APP__.service.published"
+
