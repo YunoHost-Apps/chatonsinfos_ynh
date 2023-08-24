@@ -5,9 +5,9 @@ It shall NOT be edited by hand.
 
 # Chatons Infos pour YunoHost
 
-[![Niveau d’intégration](https://dash.yunohost.org/integration/chatons_infos.svg)](https://dash.yunohost.org/appci/app/chatons_infos) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/chatons_infos.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/chatons_infos.maintain.svg)
+[![Niveau d’intégration](https://dash.yunohost.org/integration/chatonsinfos.svg)](https://dash.yunohost.org/appci/app/chatonsinfos) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/chatonsinfos.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/chatonsinfos.maintain.svg)
 
-[![Installer Chatons Infos avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=chatons_infos)
+[![Installer Chatons Infos avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=chatonsinfos)
 
 *[Read this readme in english.](./README.md)*
 
@@ -16,7 +16,7 @@ Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) po
 
 ## Vue d’ensemble
 
-Ceci est une fausse description des fonctionalités de l'app
+ChatonsInfos est un protocole de partage de données sur le collectif CHATONS, ses membres et leurs services.
 
 
 **Version incluse :** 1.0~ynh1
@@ -32,19 +32,19 @@ Ceci est une fausse description des fonctionalités de l'app
 * Site officiel de l’app : <https://framagit.org/chatons/chatonsinfos/-/blob/master/>
 * Documentation officielle de l’admin : <https://framagit.org/chatons/chatonsinfos/-/blob/master/README.md>
 * Dépôt de code officiel de l’app : <https://framagit.org/chatons/chatonsinfos>
-* Documentation YunoHost pour cette app : <https://yunohost.org/app_chatons_infos>
-* Signaler un bug : <https://github.com/YunoHost-Apps/chatons_infos_ynh/issues>
+* Documentation YunoHost pour cette app : <https://yunohost.org/app_chatonsinfos>
+* Signaler un bug : <https://github.com/YunoHost-Apps/chatonsinfos_ynh/issues>
 
 ## Informations pour les développeurs
 
-Merci de faire vos pull request sur la [branche testing](https://github.com/YunoHost-Apps/chatons_infos_ynh/tree/testing).
+Merci de faire vos pull request sur la [branche testing](https://github.com/YunoHost-Apps/chatonsinfos_ynh/tree/testing).
 
 Pour essayer la branche testing, procédez comme suit.
 
 ``` bash
-sudo yunohost app install https://github.com/YunoHost-Apps/chatons_infos_ynh/tree/testing --debug
+sudo yunohost app install https://github.com/YunoHost-Apps/chatonsinfos_ynh/tree/testing --debug
 ou
-sudo yunohost app upgrade chatons_infos -u https://github.com/YunoHost-Apps/chatons_infos_ynh/tree/testing --debug
+sudo yunohost app upgrade chatonsinfos -u https://github.com/YunoHost-Apps/chatonsinfos_ynh/tree/testing --debug
 ```
 
 **Plus d’infos sur le packaging d’applications :** <https://yunohost.org/packaging_apps>
