@@ -1,7 +1,3 @@
-This is a dummy disclaimer to display after the install
+After filling informations in the configuration panel, in order to be added to stats.chatons.org, you could send by mail this link to contact@chatons.org.
 
-The app url is `__DOMAIN____PATH__`
-
-The app install dir is `__INSTALL_DIR__`
-
-The app id is `__ID__`
+URL of the organization.properties: `https://__DOMAIN__/.well_known/chatonsinfos/organization.properties`

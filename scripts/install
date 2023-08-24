@@ -10,6 +10,18 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
+# STORE SETTINGS FROM MANIFEST
+#=================================================
+
+
+#=================================================
+# STORE SETTINGS FROM MANIFEST
+#=================================================
+
+#ynh_app_setting_set --app=$app --key=maintenance_mode --value=$maintenance_mode
+
+
+#=================================================
 # APP "BUILD" (DEPLOYING SOURCES, VENV, COMPILING ETC)
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -26,7 +38,9 @@ mkdir $install_dir/public
 # $install_dir will automatically be initialized with some decent 
 # permission by default ... however, you may need to recursively reapply
 # ownership to all files such as after the ynh_setup_source step
+chown -R root:root "$install_dir/sources"
 chown -R $app:www-data "$install_dir/public"
+chmod -R o-rwx "$install_dir"
 
 #=================================================
 # APP INITIAL CONFIGURATION
@@ -34,10 +48,29 @@ chown -R $app:www-data "$install_dir/public"
 # ADD A CONFIGURATION
 #=================================================
 ynh_script_progression --message="Adding a configuration file..." --weight=1
+ 
+ls -l $install_dir/sources/main
+cp "$install_dir/sources/MODELES/organization.properties" "$install_dir/public/"
+mkdir -p "$install_dir/public/organization.d/subs"
+mkdir "$install_dir/public/organization.d/metrics"
 
-cp "$install_dir/sources/organization.properties" "$install_dir/public/"
+chown -R $app:www-data "$install_dir/public"
 
-chown -R $app:www-data"$install_dir/public"
+#=================================================
+# GENERATE CONFIG PANEL
+#=================================================
+ynh_script_progression --message="Generating configuration panel..." --weight=1
+
+generate_config_panel
+
+#=================================================
+# ADD A CRON JOB
+#=================================================
+
+cron_path="/etc/cron.daily/$app"
+ynh_add_config --template="../conf/cron" --destination="$cron_path"
+chown root: "$cron_path"
+chmod 644 "$cron_path"
 
 #=================================================
 # GENERIC FINALIZATION

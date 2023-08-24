@@ -1,1 +1,1 @@
-This is a dummy description of this app features
+ChatonsInfos is a protocol for sharing data about the CHATONS collective, its members and their services.

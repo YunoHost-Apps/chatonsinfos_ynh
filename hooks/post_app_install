@@ -3,4 +3,4 @@
 source /etc/yunohost/apps/chatonsinfo/scripts/_common.sh
 source /usr/share/yunohost/helpers
 
-rewrite_config_panel()
+generate_config_panel
