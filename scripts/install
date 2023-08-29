@@ -51,6 +51,11 @@ ynh_script_progression --message="Adding a configuration file..." --weight=1
  
 ls -l $install_dir/sources/main
 cp "$install_dir/sources/MODELES/organization.properties" "$install_dir/public/"
+orga_path="$install_dir/public/organization.properties"
+
+ynh_write_var_in_file --file="$orga_path" --key="file.datetime" --value="$(date '+%Y-%m-%dT%H:%M:%S')"
+ynh_write_var_in_file --file="$orga_path" --key="file.generator" --value="chatonsinfos_ynh"
+
 mkdir -p "$install_dir/public/organization.d/subs"
 mkdir "$install_dir/public/organization.d/metrics"
 

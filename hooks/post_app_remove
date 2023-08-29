@@ -3,4 +3,6 @@
 source /etc/yunohost/apps/chatonsinfo/scripts/_common.sh
 source /usr/share/yunohost/helpers
 
-generate_config_panel
+ynh_secure_remove --file="$install_dir/public/${YNH_APP_ID}.properties"
+
+sed -i "/^subs\.${YNH_APP_ID} =/d" "$install_dir/public/organization.properties"

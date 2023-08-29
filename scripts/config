@@ -18,6 +18,64 @@ source /usr/share/yunohost/helpers
 
 ynh_abort_if_errors
 
+
+#=================================================
+# SPECIFIC GETTERS FOR TOML SHORT KEY
+#=================================================
+get__host_properties() {
+    local short_setting="${1//_/.}"
+    local index="${1#*__}"
+    IFS='|' read -a values <<< "$(ynh_app_setting_get $app $short_setting)"
+    echo "value: \"${values[$(($index - 1))]:-}\""
+}
+
+#=================================================
+# SPECIFIC SETTERS FOR TOML SHORT KEYS
+#=================================================
+set__multi_file() {
+    local short_setting="${1//_/.}"
+    local type="${2}"
+    local bind_files="${3#*(}"
+    bind_files="${3%*)}"
+    local value="${!1}"
+    local bind_file
+    ynh_app_setting_set --app=$app --key=$1 --value="$value"
+    ynh_print_info --message="Configuration key '$short_setting' edited in app settings"
+    if [ "$bind_files" != "" ]
+    then
+        for bind_file in $bind_files
+        do
+            ynh_read_var_in_file --file="${bind_file}" --key="${short_settings}"
+            ynh_print_info --message="Configuration key '$short_setting' edited in '${bind_file}'"
+        done
+    fi
+}
+
+set__manage_subs() {
+    ynh_print_info --message="Configuration key '$1' edited in app settings"
+    ynh_app_setting_set --app=$app --key=$1 --value="${!1}"
+    
+    ynh_print_info --message="Subs added in organization.properties"
+    update_subs
+}
+
+#=================================================
+# OVERWRITING APPLY STEP
+#=================================================
+ynh_app_config_apply() {
+
+    _ynh_app_config_apply
+
+    # Update date of properties files
+    local date=$(date '+%Y-%m-%dT%H:%M:%S')
+    ynh_write_var_in_file --file="$install_dir/public/organization.properties" --key="file.datetime" --value="$date"
+    local apps=$(yunohost app list | grep "id\:" | sed "s/ *id: //g")
+    for _app_id in $apps
+    do
+        ynh_write_var_in_file --file="$install_dir/public/$_app_id.properties" --key="file.datetime" --value="$date"
+    done
+
+}
 #=================================================
 # GENERIC FINALIZATION
 #=================================================

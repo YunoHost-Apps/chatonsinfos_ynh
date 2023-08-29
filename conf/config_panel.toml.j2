@@ -1,6 +1,7 @@
 
 version = "1.0"
 [main]
+bind = ":__INSTALL_DIR__/public/organization.properties"
 
 services = []
 
@@ -11,53 +12,50 @@ services = []
     [main.organization]
     name = ""
     # help = ""
-    
+    optional = true
 
-
-# [Organisation]
-# Nom de l'organisation (type STRING, obligatoire, ex. LibreServiceEU).
-[main.organization.name]
-        ask.en = "Nom de l'oganisation"
+        [main.organization.name]
+        ask.fr = "Nom de l'oganisation"
         type = "string"
-		bind = "organization.name>/var/www/chatonsinfo/public/organization.properties"
+        example = "Le petit chaton"
+		bind = "organization.name:"
+        optional = false
 
-# Description de l'organisation (type STRING, recommandé, ex. LibreServiceEU est le chaton de Devinsy).
-[main.organization.description]
-        ask.en = "Description de l'organisation"
+        [main.organization.description]
+        ask.fr = "Description de l'organisation"
+        help.fr = "Une courte description de votre chatons en 5 ou 6 mots."
+        example = "Association d'éducation populaire aux enjeux du numérique"
         type = "string"
-		bind = "organization.description"
-		optional = true
+		bind = "organization.description:"
 
-[main.organization.status-level]
-        ask.en = "Statut"
+        [main.organization.status-level]
+        ask.fr = "Statut"
         type = "string"
 		choices.ACTIVE = "Actif"
 		choices.IDLE = "En pause"
 		choices.AWAY = "Inactif"
-		bind = "organization.status.level"
-		optional = true
+		bind = "organization.status.level:"
 
-[main.organization.status-description]
-        ask.en = "Description du statut"
+        [main.organization.status-description]
+        ask.fr = "Description du statut"
         type = "string"
-		bind = "organization.status.description"
-		optional = true
+		bind = "organization.status.description:"
 		visible = "status-level == 'IDLE'"
 
-[main.organization.startdate]
-        ask.en = "Date de création"
+        [main.organization.startdate]
+        ask.fr = "Date de création"
         type = "date"
-		optional = true
+		bind = "organization.:"
 
-[main.organization.enddate]
-        ask.en = "Date de fermeture"
+        [main.organization.enddate]
+        ask.fr = "Date de fermeture"
         type = "date"
-		optional = true
 		visible = "status-level == 'AWAY'"
+		bind = "organization.:"
 	
 
-[main.organization.type]
-        ask.en = "Type d'organisation"
+        [main.organization.type]
+        ask.fr = "Type d'organisation"
         type = "string"
 		choices.ASSOCIATION = "Association"
 		choices.INFORMAL = "Informel"
@@ -66,97 +64,93 @@ services = []
 		choices.COMPANY = "Société"
 		choices.INDIVIDUAL = "Individue"
 		choices.OTHER = "Autre"
-		bind = "organization.type"
+		bind = "organization.type:"
+        optional = false
 
 
-[main.organization.website]
-        ask.en = "Siteweb"
+        [main.organization.website]
+        ask.fr = "Siteweb"
         type = "url"
-		bind = "organization.website"
-		optional = true
+		bind = "organization.website:"
 
 
-[main.organization.logo]
-        ask.en = "Name of the project"
+        [main.organization.logo]
+        ask.fr = "Name of the project"
         type = "url"
-		bind = "organization.logo"
-		optional = true
+		bind = "organization.logo:"
 
-[main.organization.contact-url]
-        ask.en = "URL de contact"
+        [main.organization.contact-url]
+        ask.fr = "URL de contact"
         type = "url"
-		bind = "organization.contact.url"
-		optional = true
+		bind = "organization.contact.url:"
 
-[main.organization.contact-mail]
-        ask.en = "Mail de contact"
+        [main.organization.contact-mail]
+        ask.fr = "Mail de contact"
         type = "email"
-		bind = "organization.contact.email"
-		optional = true
+		bind = "organization.contact.email:"
 
-[main.organization.legal-url]
-        ask.en = "Mentions légales"
+        [main.organization.legal-url]
+        ask.fr = "Mentions légales"
         type = "url"
-		bind = "organization.legal.url"
-		optional = true
+		bind = "organization.legal.url:"
 
-[main.organization.guide-technical]
-        ask.en = "Documentation technique"
+        [main.organization.guide-technical]
+        ask.fr = "Documentation technique"
         type = "url"
-		bind = "organization.guide.technical"
+		bind = "organization.guide.technical:"
 		default = "https://yunohost.org/admindoc"
-		optional = true
 
-[main.organization.guide-user]
-        ask.en = "Documentation utilisateurice"
+        [main.organization.guide-user]
+        ask.fr = "Documentation utilisateurice"
         type = "url"
-		bind = "organization.guide.user"
+		bind = "organization.guide.user:"
 		default = "https://yunohost.org/user_guide"
-		optional = true
 
-[main.organization.status-level-chatons]
-        ask.en = "Statut"
+        [main.organization.status-level-chatons]
+        ask.fr = "Statut"
         type = "string"
 		choices.ACTIVE = "Actif"
 		choices.IDLE = "En pause"
 		choices.AWAY = "Inactif"
-		bind = "organization.memberof.chatons.status.level"
+		bind = "organization.memberof.chatons.status.level:"
+		optional = false
 
-[main.organization.status-description]
-        ask.en = "Description du statut"
+        [main.organization.status-description]
+        ask.fr = "Description du statut"
         type = "string"
-		bind = "organization.memberof.chatons.status.description"
-		optional = true
+		bind = "organization.memberof.chatons.status.description:"
 		visible = "status-level-chatons == 'IDLE'"
 
-[main.organization.startdate-chatons]
-        ask.en = "Date d'entrée dans le collectif"
+        [main.organization.startdate-chatons]
+        ask.fr = "Date d'entrée dans le collectif"
         type = "date"
-		bind = "organization.memberof.chatons.startdate"
+		bind = "organization.memberof.chatons.startdate:"
+		optional = false
 
-[main.organization.enddate-chatons]
-        ask.en = "Date de sortie du collectif"
+        [main.organization.enddate-chatons]
+        ask.fr = "Date de sortie du collectif"
         type = "date"
-		optional = true
 		visible = "status-level-chatons == 'AWAY'"
-		bind = "organization.memberof.chatons.enddate"
+		bind = "organization.memberof.chatons.enddate:"
 
     [main.owner]
     name = "Propriétaire de l'organisation"
 	optional = true
 
-	[main.owner.owner-name]
-        ask.en = "Nom"
+	    [main.owner.owner-name]
+        ask.fr = "Nom"
         type = "string"
-		bind = "organization.owner.name"
-	[main.owner.owner-website]
-        ask.en = "siteweb"
+		bind = "organization.owner.name:"
+
+	    [main.owner.owner-website]
+        ask.fr = "siteweb"
         type = "url"
-		bind = "organization.owner.website"
-	[main.owner.owner-logo]
-        ask.en = "Logo"
+		bind = "organization.owner.website:"
+
+	    [main.owner.owner-logo]
+        ask.fr = "Logo"
         type = "url"
-		bind = "organization.owner.logo"
+		bind = "organization.owner.logo:"
 
 
 
@@ -165,33 +159,34 @@ services = []
     # help = ""
 	optional = true
 
-[main.location.country-name]
-        ask.en = "Pays de l'organisation"
+        [main.location.country-name]
+        ask.fr = "Pays de l'organisation"
         type = "string"
-		bind = "organization.country.name"
+		bind = "organization.country.name:"
 		optional = false
 
-[main.location.country-code]
-        ask.en = "Code pays de l'organisation"
+        [main.location.country-code]
+        ask.fr = "Code pays de l'organisation"
 		help = "Table ISO 3166-1 alpha-2 : https://fr.wikipedia.org/wiki/ISO_3166-1#Table_de_codage"
         type = "string"
-		bind = "organization.country.code"
+		bind = "organization.country.code:"
 		default = "FR"
 
-# Latitude (type DECIMAL_DEGREE, recommandé, format DD, ex. 15,23456).
-[main.location.latitude]
-        ask.en = "Latitude"
+        # Latitude (type DECIMAL_DEGREE, recommandé, format DD, ex. 15,23456).
+        [main.location.latitude]
+        ask.fr = "Latitude"
         type = "string"
-		bind = "organization.geolocation.latitude"
-[main.location.longitude]
-        ask.en = "Longitude"
+		bind = "organization.geolocation.latitude:"
+        
+        [main.location.longitude]
+        ask.fr = "Longitude"
         type = "string"
-		bind = "organization.geolocation.longitude"
+		bind = "organization.geolocation.longitude:"
 
-[main.location.address]
-        ask.en = "Adresse"
+        [main.location.address]
+        ask.fr = "Adresse"
         type = "string"
-		bind = "organization.geolocation.address"
+		bind = "organization.geolocation.address:"
 
 
 
@@ -200,68 +195,80 @@ services = []
     help = "Liens vers les comptes réseaux sociaux de l'organisation"
 	optional = true
 
-[main.socialnetworks.diaspora]
-        ask.en = "Diaspora"
+        [main.socialnetworks.diaspora]
+        ask.fr = "Diaspora"
         type = "url"
-		bind = "organization.socialnetworks.diaspora"
-[main.socialnetworks.facebook]
-        ask.en = "Facebook"
+		bind = "organization.socialnetworks.diaspora:"
+
+        [main.socialnetworks.facebook]
+        ask.fr = "Facebook"
         type = "url"
-		bind = "organization.socialnetworks.facebook"
-[main.socialnetworks.funkwhale]
-        ask.en = "Funkwhale"
+		bind = "organization.socialnetworks.facebook:"
+
+        [main.socialnetworks.funkwhale]
+        ask.fr = "Funkwhale"
         type = "url"
-		bind = "organization.socialnetworks.funkwhale"
-[main.socialnetworks.mastodon]
-        ask.en = "Mastodon"
+		bind = "organization.socialnetworks.funkwhale:"
+
+        [main.socialnetworks.mastodon]
+        ask.fr = "Mastodon"
         type = "url"
-		bind = "organization.socialnetworks.mastodon"
-[main.socialnetworks.pleroma]
-        ask.en = "Pleroma"
+		bind = "organization.socialnetworks.mastodon:"
+        
+        [main.socialnetworks.pleroma]
+        ask.fr = "Pleroma"
         type = "url"
-		bind = "organization.socialnetworks.pleroma"
-[main.socialnetworks.mobilizon]
-        ask.en = "Mobilizon"
+		bind = "organization.socialnetworks.pleroma:"
+        
+        [main.socialnetworks.mobilizon]
+        ask.fr = "Mobilizon"
         type = "url"
-		bind = "organization.socialnetworks.mobilizon"
-[main.socialnetworks.peertube]
-        ask.en = "Peertube"
+		bind = "organization.socialnetworks.mobilizon:"
+        
+        [main.socialnetworks.peertube]
+        ask.fr = "Peertube"
         type = "url"
-		bind = "organization.socialnetworks.peertube"
-[main.socialnetworks.pixelfed]
-        ask.en = "Pixelfed"
+		bind = "organization.socialnetworks.peertube:"
+        
+        [main.socialnetworks.pixelfed]
+        ask.fr = "Pixelfed"
         type = "url"
-		bind = "organization.socialnetworks.pixelfed"
-[main.socialnetworks.twitter]
-        ask.en = "Twitter"
+		bind = "organization.socialnetworks.pixelfed:"
+        
+        [main.socialnetworks.twitter]
+        ask.fr = "Twitter"
         type = "url"
-		bind = "organization.socialnetworks.twitter"
+		bind = "organization.socialnetworks.twitter:"
 
     [main.chatrooms]
     name = "Salons de discussion"
     help = "Adresse vers les salons/équipes de discussion publics de l'organisation"
 	optional = true
 
-[main.chatrooms.xmpp]
-        ask.en = "XMPP"
+        [main.chatrooms.xmpp]
+        ask.fr = "XMPP"
         type = "url"
-		bind = "organization.chatrooms.xmpp"
-[main.chatrooms.irc]
-        ask.en = "IRC"
+		bind = "organization.chatrooms.xmpp:"
+
+        [main.chatrooms.irc]
+        ask.fr = "IRC"
         type = "url"
-		bind = "organization.chatrooms.irc"
-[main.chatrooms.matrix]
-        ask.en = "Matrix"
+		bind = "organization.chatrooms.irc:"
+        
+        [main.chatrooms.matrix]
+        ask.fr = "Matrix"
         type = "url"
-		bind = "organization.chatrooms.matrix"
-[main.chatrooms.rocketchat]
-        ask.en = "RocketChat"
+		bind = "organization.chatrooms.matrix:"
+        
+        [main.chatrooms.rocketchat]
+        ask.fr = "RocketChat"
         type = "url"
-		bind = "organization.chatrooms.rocketchat"
-[main.chatrooms.mattermost]
-        ask.en = "Mattermost"
+		bind = "organization.chatrooms.rocketchat:"
+        
+        [main.chatrooms.mattermost]
+        ask.fr = "Mattermost"
         type = "url"
-		bind = "organization.chatrooms.mattermost"
+		bind = "organization.chatrooms.mattermost:"
 
 
     [main.funding]
@@ -271,41 +278,46 @@ services = []
 # Liens vers les services de paiement permettant de récolter des donations pour votre chaton (type URL, optionnel).
 # Dans le cas d'une solution maison (exemple : pont vers votre banque), choisir "organization.funding.custom".
 # Liste non exhaustive à laquelle vous pouvez ajouter d'autres services.
-[main.funding.liberapay]
-        ask.en = "Liberapay"
+        [main.funding.liberapay]
+        ask.fr = "Liberapay"
         type = "url"
-		bind = "organization.funding.liberapay"
-[main.funding.tipee]
-        ask.en = "Tipee"
+		bind = "organization.funding.liberapay:"
+
+        [main.funding.tipee]
+        ask.fr = "Tipee"
         type = "url"
-		bind = "organization.funding.Tipee"
-[main.funding.helloasso]
-        ask.en = "Helloasso"
+		bind = "organization.funding.Tipee:"
+
+        [main.funding.helloasso]
+        ask.fr = "Helloasso"
         type = "url"
-		bind = "organization.funding.helloasso"
-[main.funding.paypal]
-        ask.en = "Paypal"
+		bind = "organization.funding.helloasso:"
+
+        [main.funding.paypal]
+        ask.fr = "Paypal"
         type = "url"
-		bind = "organization.funding.paypal"
-[main.funding.custom]
-        ask.en = "Custom"
+		bind = "organization.funding.paypal:"
+
+        [main.funding.custom]
+        ask.fr = "Custom"
         type = "url"
-		bind = "organization.funding.custom"
+		bind = "organization.funding.custom:"
 
 [host]
 name = "Hébergement"
-[host.provider]
-name = "Fournisseur"
-[host.provider.name]
-        ask.en = "Nom de l'hébergeur"
-		help.en = "Hébergeur de la machine qui fait tourner le service, dans le cas d'un auto-hébergement c'est vous !"
-        type = "string"
-		bind = "host.name"
+bind = "multi_file({% for app in apps %}__INSTALL_DIR__/public/{{ app }}.properties {% endfor %})"
 
-[host.provider.description]
-        ask.en = "Description"
+    [host.provider]
+    name = "Fournisseur"
+        
+        [host.provider.host_name]
+        ask.fr = "Nom de l'hébergeur"
+		help.fr = "Hébergeur de la machine qui fait tourner le service, dans le cas d'un auto-hébergement c'est vous !"
         type = "string"
-		bind = "host.description"
+
+        [host.provider.host_description]
+        ask.fr = "Description"
+        type = "string"
 
 # Si vous avez du mal à remplir les champs précédents, ce tableau pourra vous aider :
 #                  NANO    PHYSICAL    VIRTUAL    SHARED    CLOUD
@@ -315,127 +327,142 @@ name = "Fournisseur"
 # OUTSOURCED        --        --         vps      shared    cloud
 # Légendes : pm : physical machine ; vm : virtual machine ; vps : virtual private server.
 
-[host.provider.type]
-        ask.en = "Type d'hébergement"
+        [host.provider.host_provider_type]
+        ask.fr = "Type d'hébergement"
         type = "string"
 		choices.HOME = "hébergement à domicile"
 		choices.HOSTEDBAY = "serveur personnel hébergé dans une baie d'un fournisseur"
 		choices.HOSTEDSERVER = "serveur d'un fournisseur"
 		choices.OUTSOURCED = "infrastructure totalement sous-traitée"
-		bind = "host.provider.type"
 
-[host.provider.hypervisor]
-        ask.en = "Nom de l'hyperviseur"
-		help.en = ""
+        [host.provider.host_provider_hypervisor]
+        ask.fr = "Nom de l'hyperviseur"
+		help.fr = ""
         type = "string"
 		optional = true
-		bind = "host.provider.hypervisor"
 
-[host.provider.country-name]
-        ask.en = "Pays"
-		help.en = ""
+        [host.provider.host_country_name]
+        ask.fr = "Pays"
+		help.fr = ""
         type = "string"
-		bind = "host.country.name"
 
-[host.provider.country-code]
-        ask.en = "Code Pays"
+        [host.provider.host_country_code]
+        ask.fr = "Code Pays"
 		help = "Table ISO 3166-1 alpha-2 : https://fr.wikipedia.org/wiki/ISO_3166-1#Table_de_codage"
         type = "string"
-		bind = "host.country.code"
 		default = "FR"
 
-[host.server.type]
-        ask.en = "Type de serveur"
+        [host.server.host_server_type]
+        ask.fr = "Type de serveur"
         type = "string"
 		choices.NANO = "nano-ordinateur (Raspberry Pi, Olimex…)"
 		choices.PHYSICAL = "machine physique"
 		choices.VIRTUAL = "machine virtuelle"
 		choices.SHARED = "hébergement mutualisé"
 		choices.CLOUD = "infrastructure multi-serveurs"
-		bind = "host.server.type"
 
-{% for app in range(11) %}
+{% for app in apps %}
 [{{ app }}]
-[{{ app }}.service]
+bind = ":__INSTALL_DIR__/public/{{ app }}.properties"
 
-[{{ app }}.service.published]
-        ask.en = "Publié"
-		help.en = "Faut-il publier la fiche descriptive (.properties) du service ?"
+    [{{ app }}.service]
+
+        [{{ app }}.service.{{ app }}_published]
+        ask.fr = "Publié"
+		help.fr = "Faut-il publier la fiche descriptive (.properties) du service ?"
         type = "boolean"
+        bind = "manage_subs()"
 
-[{{ app }}.service.startdate]
-        ask.en = "Date d'ouverture"
+        [{{ app }}.service.{{ app }}_startdate]
+        ask.fr = "Date d'ouverture"
         type = "date"
-        bind = "service.startdate"
-        visible = "{{ app }}.service.published"
+        bind = "service.startdate:"
+        visible = "{{ app }}.service.{{ app }}_published"
 
-[{{ app }}.service.enddate]
-        ask.en = "Date de fermeture"
+        [{{ app }}.service.{{ app }}_enddate]
+        ask.fr = "Date de fermeture"
         type = "date"
 		optional = true
-        bind = "service.enddate"
-        visible = "{{ app }}.service.published"
+        bind = "service.enddate:"
+        visible = "{{ app }}.service.{{ app }}_published"
 
-[{{ app }}.service.description]
-        ask.en = "Description"
+        [{{ app }}.service.{{ app }}_description]
+        ask.fr = "Description"
         type = "string"
-		bind = "service.description"
-        visible = "{{ app }}.service.published"
+		bind = "service.description:"
+        visible = "{{ app }}.service.{{ app }}_published"
 
-[{{ app }}.service.logo]
-        ask.en = "Logo"
+        [{{ app }}.service.{{ app }}_logo]
+        ask.fr = "Logo"
         type = "url"
-		bind = "service.logo"
-        visible = "{{ app }}.service.published"
+		bind = "service.logo:"
+        visible = "{{ app }}.service.{{ app }}_published"
 
-[{{ app }}.service.legal-url]
-        ask.en = "Mentions légales"
+        [{{ app }}.service.{{ app }}_legal-url]
+        ask.fr = "Mentions légales"
         type = "url"
-		bind = "service.legal.url"
-        visible = "{{ app }}.service.published"
+		bind = "service.legal.url:"
+        visible = "{{ app }}.service.{{ app }}_published"
 
-[{{ app }}.service.guide-technical]
-        ask.en = "Documentation technique"
+        [{{ app }}.service.{{ app }}_guide-technical]
+        ask.fr = "Documentation technique"
         type = "url"
-		bind = "service.guide.technical"
-        visible = "{{ app }}.service.published"
+		bind = "service.guide.technical:"
+        visible = "{{ app }}.service.{{ app }}_published"
 
-[{{ app }}.service.guide-user]
-        ask.en = "Documentation utilisateurices"
+        [{{ app }}.service.{{ app }}_guide-user]
+        ask.fr = "Documentation utilisateurices"
         type = "url"
-		bind = "service.guide.user"
-        visible = "{{ app }}.service.published"
+		bind = "service.guide.user:"
+        visible = "{{ app }}.service.{{ app }}_published"
 
-[{{ app }}.service.contact-url]
-        ask.en = "Page de support"
+        [{{ app }}.service.{{ app }}_contact-url]
+        ask.fr = "Page de support"
         type = "url"
-		bind = "service.contact.url"
+		bind = "service.contact.url:"
         optional = true
-        visible = "{{ app }}.service.published"
+        visible = "{{ app }}.service.{{ app }}_published"
 
-[{{ app }}.service.contact-email]
-        ask.en = "Courriel de support"
+        [{{ app }}.service.{{ app }}_contact-email]
+        ask.fr = "Courriel de support"
         type = "email"
-		bind = "service.contact.email"
+		bind = "service.contact.email:"
         optional = true
-        visible = "{{ app }}.service.published"
+        visible = "{{ app }}.service.{{ app }}_published"
 
-[{{ app }}.service.registration]
-        ask.en = "Inscription"
+        [{{ app }}.service.{{ app }}_registration]
+        ask.fr = "Inscription"
         type = "string"
 		choices.None = "Le service s'utilise sans inscription"
 		choices.Free = "Inscription nécessaire mais ouverte à tout le monde et gratuite"
         choices.Member = "Inscription restreinte aux membres (la notion de membre pouvant être très relative, par exemple, une famille, un cercle d’amis, adhérents d'association…)"
         choices.Client = "Inscription liée à une relation commerciale (facture…)" 
-		bind = "service.registration"
-        visible = "{{ app }}.service.published"
+		bind = "service.registration:"
+        visible = "{{ app }}.service.{{ app }}_published"
 
-[{{ app }}.service.registration-load]
-        ask.en = "Capacité"
+        [{{ app }}.service.{{ app }}_registration-load]
+        ask.fr = "Capacité"
         type = "string"
 		choices.OPEN = "Le service accueille de nouveaux comptes"
 		choices.FULL = "Le service n'accueille plus de nouveau compte pour l'instant"
-		bind = "service.registration.load"
-        visible = "{{ app }}.service.published"
+		bind = "service.registration.load:"
+        visible = "{{ app }}.service.{{ app }}_published"
 
 {% endfor %}
+
+[advanced]
+name.fr = "Avancé"
+
+
+    [advanced.main]
+    name = ""
+    # help = ""
+    optional = true
+
+        [advanced.main.external_subs]
+        ask.fr = "Fichiers properties complémentaires"
+		help.fr = "Permet de déclarer d'autres services ou offres d'hébergement présent sur d'autres serveurs. Saisissez les tags au format: `clé:https://url/du/fichier.properties`. Attention: la clé doit-être unique et ne pas être en conflit avec un id d'une app sur ce yunohost"
+        type = "tags"
+        pattern.regexp = "^[a-zA-Z_]+:https?://.*\.properties$"
+        pattern.error = "Saisissez les tags au format: `clé:https://url/du/fichier.properties`"
+        bind="manage_subs()"
