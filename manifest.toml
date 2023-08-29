@@ -20,7 +20,7 @@ code = "https://framagit.org/chatons/chatonsinfos"
 [integration]
 yunohost = ">= 11.1.0"
 architectures = "all"
-multi_instance = "not_relevant"
+multi_instance = false
 ldap = "not_relevant"
 sso = "not_relevant"
 disk = "50M"
@@ -45,6 +45,7 @@ ram.runtime = "50M"
     [resources.sources.main]
     url = "https://framagit.org/chatons/chatonsinfos/-/archive/master/chatonsinfos-master.tar.gz?path=MODELES"
     sha256 = "664e1c934ea2fd0b5ee4ff55bbabbc81227a256ee12fd7d18319d13c095690bb"
+    format = "tar.gz"
     in_subdir = true
     
     [resources.system_user]
@@ -53,3 +54,9 @@ ram.runtime = "50M"
     [resources.install_dir]
     # This will create/remove the install dir as /var/www/$app
     # and store the corresponding setting $install_dir
+
+    [resources.permissions]
+    main.url = "/"
+    main.show_tile = false
+    main.allowed = "visitors"
+    main.auth_header = false

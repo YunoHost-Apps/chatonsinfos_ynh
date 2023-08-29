@@ -1,7 +1,8 @@
 #!/bin/bash
 
-source /etc/yunohost/apps/chatonsinfo/scripts/_common.sh
+source /etc/yunohost/apps/chatonsinfos/scripts/_common.sh
 source /usr/share/yunohost/helpers
 
+install_dir=/var/www/chatonsinfos/
 generate_config_panel
 update_subs

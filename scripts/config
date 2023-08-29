@@ -32,11 +32,13 @@ get__host_properties() {
 #=================================================
 # SPECIFIC SETTERS FOR TOML SHORT KEYS
 #=================================================
+get__multi_file() {
+    ynh_app_setting_get --app=$app --key=$1
+}
 set__multi_file() {
     local short_setting="${1//_/.}"
     local type="${2}"
-    local bind_files="${3#*(}"
-    bind_files="${3%*)}"
+    local bind_files="$(echo $3 | sed 's/multi_file(//' | sed 's/)//')"
     local value="${!1}"
     local bind_file
     ynh_app_setting_set --app=$app --key=$1 --value="$value"
@@ -51,6 +53,9 @@ set__multi_file() {
     fi
 }
 
+get__manage_subs() {
+    ynh_app_setting_get --app=$app --key=$1
+}
 set__manage_subs() {
     ynh_print_info --message="Configuration key '$1' edited in app settings"
     ynh_app_setting_set --app=$app --key=$1 --value="${!1}"

@@ -18,7 +18,7 @@ source /usr/share/yunohost/helpers
 # STORE SETTINGS FROM MANIFEST
 #=================================================
 
-#ynh_app_setting_set --app=$app --key=maintenance_mode --value=$maintenance_mode
+ynh_app_setting_set --app=$app --key=host_server_distribution --value="YunoHost"
 
 
 #=================================================
@@ -38,9 +38,18 @@ mkdir $install_dir/public
 # $install_dir will automatically be initialized with some decent 
 # permission by default ... however, you may need to recursively reapply
 # ownership to all files such as after the ynh_setup_source step
-chown -R root:root "$install_dir/sources"
+chown -R root:root "$install_dir"
+chown $app:www-data "$install_dir"
 chown -R $app:www-data "$install_dir/public"
 chmod -R o-rwx "$install_dir"
+
+#=================================================
+# SYSTEM CONFIGURATION
+#=================================================
+ynh_script_progression --message="Adding system configurations related to $app..." --weight=1
+
+# Create a dedicated NGINX config using the conf/nginx.conf template
+ynh_add_nginx_config
 
 #=================================================
 # APP INITIAL CONFIGURATION
@@ -49,15 +58,13 @@ chmod -R o-rwx "$install_dir"
 #=================================================
 ynh_script_progression --message="Adding a configuration file..." --weight=1
  
-ls -l $install_dir/sources/main
+tree $install_dir/sources
 cp "$install_dir/sources/MODELES/organization.properties" "$install_dir/public/"
 orga_path="$install_dir/public/organization.properties"
 
 ynh_write_var_in_file --file="$orga_path" --key="file.datetime" --value="$(date '+%Y-%m-%dT%H:%M:%S')"
 ynh_write_var_in_file --file="$orga_path" --key="file.generator" --value="chatonsinfos_ynh"
 
-mkdir -p "$install_dir/public/organization.d/subs"
-mkdir "$install_dir/public/organization.d/metrics"
 
 chown -R $app:www-data "$install_dir/public"
 
@@ -71,6 +78,7 @@ generate_config_panel
 #=================================================
 # ADD A CRON JOB
 #=================================================
+ynh_script_progression --message="Adding cron job to generate metrics..." --weight=1
 
 cron_path="/etc/cron.daily/$app"
 ynh_add_config --template="../conf/cron" --destination="$cron_path"
@@ -80,7 +88,6 @@ chmod 644 "$cron_path"
 #=================================================
 # GENERIC FINALIZATION
 #=================================================
-
 #=================================================
 # END OF SCRIPT
 #=================================================

@@ -1,7 +1,7 @@
 
 version = "1.0"
 [main]
-bind = ":__INSTALL_DIR__/public/organization.properties"
+bind = ":{{ install_dir }}/public/organization.properties"
 
 services = []
 
@@ -14,7 +14,7 @@ services = []
     # help = ""
     optional = true
 
-        [main.organization.name]
+        [main.organization._name]
         ask.fr = "Nom de l'oganisation"
         type = "string"
         example = "Le petit chaton"
@@ -54,7 +54,7 @@ services = []
 		bind = "organization.:"
 	
 
-        [main.organization.type]
+        [main.organization._type]
         ask.fr = "Type d'organisation"
         type = "string"
 		choices.ASSOCIATION = "Association"
@@ -115,7 +115,7 @@ services = []
 		bind = "organization.memberof.chatons.status.level:"
 		optional = false
 
-        [main.organization.status-description]
+        [main.organization.status-description-chatons]
         ask.fr = "Description du statut"
         type = "string"
 		bind = "organization.memberof.chatons.status.description:"
@@ -305,7 +305,7 @@ services = []
 
 [host]
 name = "Hébergement"
-bind = "multi_file({% for app in apps %}__INSTALL_DIR__/public/{{ app }}.properties {% endfor %})"
+bind = "multi_file({% for app in apps.split(',') %}{{ install_dir }}/public/{{ app }}.properties {% endfor %})"
 
     [host.provider]
     name = "Fournisseur"
@@ -361,9 +361,9 @@ bind = "multi_file({% for app in apps %}__INSTALL_DIR__/public/{{ app }}.propert
 		choices.SHARED = "hébergement mutualisé"
 		choices.CLOUD = "infrastructure multi-serveurs"
 
-{% for app in apps %}
+{% for app in apps.split(',') %}
 [{{ app }}]
-bind = ":__INSTALL_DIR__/public/{{ app }}.properties"
+bind = ":{{ install_dir }}/public/{{ app }}.properties"
 
     [{{ app }}.service]
 
@@ -463,6 +463,6 @@ name.fr = "Avancé"
         ask.fr = "Fichiers properties complémentaires"
 		help.fr = "Permet de déclarer d'autres services ou offres d'hébergement présent sur d'autres serveurs. Saisissez les tags au format: `clé:https://url/du/fichier.properties`. Attention: la clé doit-être unique et ne pas être en conflit avec un id d'une app sur ce yunohost"
         type = "tags"
-        pattern.regexp = "^[a-zA-Z_]+:https?://.*\.properties$"
+        pattern.regexp = "^[a-zA-Z_]+:https?://.*\\.properties$"
         pattern.error = "Saisissez les tags au format: `clé:https://url/du/fichier.properties`"
         bind="manage_subs()"
