@@ -58,7 +58,6 @@ ynh_add_nginx_config
 #=================================================
 ynh_script_progression --message="Adding a configuration file..." --weight=1
  
-tree $install_dir/sources
 cp "$install_dir/sources/MODELES/organization.properties" "$install_dir/public/"
 orga_path="$install_dir/public/organization.properties"
 
