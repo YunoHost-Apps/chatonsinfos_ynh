@@ -45,7 +45,7 @@ create_service_properties() {
             ynh_write_var_in_file --file="$service_path" --key="service.website" --value="https://$(get_info 'domain_path')"
             ynh_write_var_in_file --file="$service_path" --key="service.logo" --value="https://$(get_info 'settings.domain')/yunohost/admin/appslogo/$(get_info 'logo')"
 
-            ynh_write_var_in_file --file="$service_path" --key="service.startdate" --value="$(date '+%Y-%m-%dT%H:%M:%S')"
+            ynh_write_var_in_file --file="$service_path" --key="service.startdate" --value="$(date '+%d/%m/%Y')"
             ynh_write_var_in_file --file="$service_path" --key="service.status.level" --value="OK"
             local ldap="$(get_info 'manifest.integration.ldap')"
             local sso="$(get_info 'manifest.integration.sso')"
