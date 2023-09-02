@@ -1,6 +1,8 @@
 
 version = "1.0"
 [main]
+name.en = "Organization"
+name.fr = "Organisation"
 bind = ":{{ install_dir }}/public/organization.properties"
 
 services = []
@@ -30,7 +32,7 @@ services = []
 
         [main.organization.status-level]
         ask.fr = "Statut"
-        type = "string"
+        type = "select"
 		choices.ACTIVE = "Actif"
 		choices.IDLE = "En pause"
 		choices.AWAY = "Inactif"
@@ -45,18 +47,18 @@ services = []
         [main.organization.startdate]
         ask.fr = "Date de création"
         type = "date"
-		bind = "organization.:"
+		bind = "organization.startdate:"
 
         [main.organization.enddate]
         ask.fr = "Date de fermeture"
         type = "date"
 		visible = "status-level == 'AWAY'"
-		bind = "organization.:"
+		bind = "organization.enddate:"
 	
 
         [main.organization._type]
         ask.fr = "Type d'organisation"
-        type = "string"
+        type = "select"
 		choices.ASSOCIATION = "Association"
 		choices.INFORMAL = "Informel"
 		choices.COOPERATIVE = "Coopérative"
@@ -75,7 +77,7 @@ services = []
 
 
         [main.organization.logo]
-        ask.fr = "Name of the project"
+        ask.fr = "Logo"
         type = "url"
 		bind = "organization.logo:"
 
@@ -108,7 +110,7 @@ services = []
 
         [main.organization.status-level-chatons]
         ask.fr = "Statut"
-        type = "string"
+        type = "select"
 		choices.ACTIVE = "Actif"
 		choices.IDLE = "En pause"
 		choices.AWAY = "Inactif"
@@ -233,7 +235,7 @@ services = []
         [main.socialnetworks.pixelfed]
         ask.fr = "Pixelfed"
         type = "url"
-		bind = "organization.socialnetworks.pixelfed:"
+		bind = "organization.socialnetworks.pixelfeld:"
         
         [main.socialnetworks.twitter]
         ask.fr = "Twitter"
@@ -305,7 +307,7 @@ services = []
 
 [host]
 name = "Hébergement"
-bind = "multi_file({% for app in apps.split(',') %}{{ install_dir }}/public/{{ app }}.properties {% endfor %})"
+bind = "multi_file({% for app in apps.split(',') %}{{ install_dir }}/public/{{ app }}.properties,{% endfor %})"
 
     [host.provider]
     name = "Fournisseur"
@@ -329,7 +331,7 @@ bind = "multi_file({% for app in apps.split(',') %}{{ install_dir }}/public/{{ a
 
         [host.provider.host_provider_type]
         ask.fr = "Type d'hébergement"
-        type = "string"
+        type = "select"
 		choices.HOME = "hébergement à domicile"
 		choices.HOSTEDBAY = "serveur personnel hébergé dans une baie d'un fournisseur"
 		choices.HOSTEDSERVER = "serveur d'un fournisseur"
@@ -354,7 +356,7 @@ bind = "multi_file({% for app in apps.split(',') %}{{ install_dir }}/public/{{ a
 
         [host.server.host_server_type]
         ask.fr = "Type de serveur"
-        type = "string"
+        type = "select"
 		choices.NANO = "nano-ordinateur (Raspberry Pi, Olimex…)"
 		choices.PHYSICAL = "machine physique"
 		choices.VIRTUAL = "machine virtuelle"
@@ -377,76 +379,65 @@ bind = ":{{ install_dir }}/public/{{ app }}.properties"
         ask.fr = "Date d'ouverture"
         type = "date"
         bind = "service.startdate:"
-        visible = "{{ app }}.service.{{ app }}_published"
 
         [{{ app }}.service.{{ app }}_enddate]
         ask.fr = "Date de fermeture"
         type = "date"
 		optional = true
         bind = "service.enddate:"
-        visible = "{{ app }}.service.{{ app }}_published"
 
         [{{ app }}.service.{{ app }}_description]
         ask.fr = "Description"
         type = "string"
 		bind = "service.description:"
-        visible = "{{ app }}.service.{{ app }}_published"
 
         [{{ app }}.service.{{ app }}_logo]
         ask.fr = "Logo"
         type = "url"
 		bind = "service.logo:"
-        visible = "{{ app }}.service.{{ app }}_published"
 
         [{{ app }}.service.{{ app }}_legal-url]
         ask.fr = "Mentions légales"
         type = "url"
 		bind = "service.legal.url:"
-        visible = "{{ app }}.service.{{ app }}_published"
 
         [{{ app }}.service.{{ app }}_guide-technical]
         ask.fr = "Documentation technique"
         type = "url"
 		bind = "service.guide.technical:"
-        visible = "{{ app }}.service.{{ app }}_published"
 
         [{{ app }}.service.{{ app }}_guide-user]
         ask.fr = "Documentation utilisateurices"
         type = "url"
 		bind = "service.guide.user:"
-        visible = "{{ app }}.service.{{ app }}_published"
 
         [{{ app }}.service.{{ app }}_contact-url]
         ask.fr = "Page de support"
         type = "url"
 		bind = "service.contact.url:"
         optional = true
-        visible = "{{ app }}.service.{{ app }}_published"
 
         [{{ app }}.service.{{ app }}_contact-email]
         ask.fr = "Courriel de support"
         type = "email"
 		bind = "service.contact.email:"
         optional = true
-        visible = "{{ app }}.service.{{ app }}_published"
 
         [{{ app }}.service.{{ app }}_registration]
         ask.fr = "Inscription"
-        type = "string"
+        type = "select"
 		choices.None = "Le service s'utilise sans inscription"
 		choices.Free = "Inscription nécessaire mais ouverte à tout le monde et gratuite"
         choices.Member = "Inscription restreinte aux membres (la notion de membre pouvant être très relative, par exemple, une famille, un cercle d’amis, adhérents d'association…)"
         choices.Client = "Inscription liée à une relation commerciale (facture…)" 
 		bind = "service.registration:"
-        visible = "{{ app }}.service.{{ app }}_published"
 
         [{{ app }}.service.{{ app }}_registration-load]
         ask.fr = "Capacité"
-        type = "string"
+        type = "select"
 		choices.OPEN = "Le service accueille de nouveaux comptes"
 		choices.FULL = "Le service n'accueille plus de nouveau compte pour l'instant"
 		bind = "service.registration.load:"
-        visible = "{{ app }}.service.{{ app }}_published"
 
 {% endfor %}
 

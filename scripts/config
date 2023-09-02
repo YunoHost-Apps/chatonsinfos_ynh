@@ -45,7 +45,7 @@ set__multi_file() {
     ynh_print_info --message="Configuration key '$short_setting' edited in app settings"
     if [ "$bind_files" != "" ]
     then
-        for bind_file in $bind_files
+        for bind_file in ${bind_files//,/ }
         do
             ynh_read_var_in_file --file="${bind_file}" --key="${short_settings}"
             ynh_print_info --message="Configuration key '$short_setting' edited in '${bind_file}'"
