@@ -1,0 +1,1 @@
+This app is specifically designed for YunoHost instances used to create CHATONS (Hosters Alternative, Transparent, Open, Neutral and Solidarity). You probably should not install it, if you are not candidate or member of this CHATONS collective.
