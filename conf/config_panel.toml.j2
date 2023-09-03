@@ -363,6 +363,7 @@ bind = "multi_file({% for app in apps.split(',') %}{{ install_dir }}/public/{{ a
 		choices.SHARED = "hébergement mutualisé"
 		choices.CLOUD = "infrastructure multi-serveurs"
 
+{% if apps != "" %}
 {% for app in apps.split(',') %}
 [{{ app }}]
 bind = ":{{ install_dir }}/public/{{ app }}.properties"
@@ -440,6 +441,7 @@ bind = ":{{ install_dir }}/public/{{ app }}.properties"
 		bind = "service.registration.load:"
 
 {% endfor %}
+{% endif %}
 
 [advanced]
 name.fr = "Avancé"
