@@ -30,7 +30,7 @@ services = []
         type = "string"
 		bind = "organization.description:"
 
-        [main.organization.status-level]
+        [main.organization.status_level]
         ask.fr = "Statut"
         type = "select"
 		choices.ACTIVE = "Actif"
@@ -38,11 +38,11 @@ services = []
 		choices.AWAY = "Inactif"
 		bind = "organization.status.level:"
 
-        [main.organization.status-description]
+        [main.organization.status_description]
         ask.fr = "Description du statut"
         type = "string"
 		bind = "organization.status.description:"
-		visible = "status-level == 'IDLE'"
+		visible = "status_level == 'IDLE'"
 
         [main.organization.startdate]
         ask.fr = "Date de création"
@@ -52,7 +52,7 @@ services = []
         [main.organization.enddate]
         ask.fr = "Date de fermeture"
         type = "date"
-		visible = "status-level == 'AWAY'"
+		visible = "status_level == 'AWAY'"
 		bind = "organization.enddate:"
 	
 
@@ -81,34 +81,34 @@ services = []
         type = "url"
 		bind = "organization.logo:"
 
-        [main.organization.contact-url]
+        [main.organization.contact_url]
         ask.fr = "URL de contact"
         type = "url"
 		bind = "organization.contact.url:"
 
-        [main.organization.contact-mail]
+        [main.organization.contact_mail]
         ask.fr = "Mail de contact"
         type = "email"
 		bind = "organization.contact.email:"
 
-        [main.organization.legal-url]
+        [main.organization.legal_url]
         ask.fr = "Mentions légales"
         type = "url"
 		bind = "organization.legal.url:"
 
-        [main.organization.guide-technical]
+        [main.organization.guide_technical]
         ask.fr = "Documentation technique"
         type = "url"
 		bind = "organization.guide.technical:"
 		default = "https://yunohost.org/admindoc"
 
-        [main.organization.guide-user]
+        [main.organization.guide_user]
         ask.fr = "Documentation utilisateurice"
         type = "url"
 		bind = "organization.guide.user:"
 		default = "https://yunohost.org/user_guide"
 
-        [main.organization.status-level-chatons]
+        [main.organization.status_level_chatons]
         ask.fr = "Statut"
         type = "select"
 		choices.ACTIVE = "Actif"
@@ -117,39 +117,39 @@ services = []
 		bind = "organization.memberof.chatons.status.level:"
 		optional = false
 
-        [main.organization.status-description-chatons]
+        [main.organization.status_description_chatons]
         ask.fr = "Description du statut"
         type = "string"
 		bind = "organization.memberof.chatons.status.description:"
-		visible = "status-level-chatons == 'IDLE'"
+		visible = "status_level_chatons == 'IDLE'"
 
-        [main.organization.startdate-chatons]
+        [main.organization.startdate_chatons]
         ask.fr = "Date d'entrée dans le collectif"
         type = "date"
 		bind = "organization.memberof.chatons.startdate:"
 		optional = false
 
-        [main.organization.enddate-chatons]
+        [main.organization.enddate_chatons]
         ask.fr = "Date de sortie du collectif"
         type = "date"
-		visible = "status-level-chatons == 'AWAY'"
+		visible = "status_level_chatons == 'AWAY'"
 		bind = "organization.memberof.chatons.enddate:"
 
     [main.owner]
     name = "Propriétaire de l'organisation"
 	optional = true
 
-	    [main.owner.owner-name]
+	    [main.owner.owner_name]
         ask.fr = "Nom"
         type = "string"
 		bind = "organization.owner.name:"
 
-	    [main.owner.owner-website]
+	    [main.owner.owner_website]
         ask.fr = "siteweb"
         type = "url"
 		bind = "organization.owner.website:"
 
-	    [main.owner.owner-logo]
+	    [main.owner.owner_logo]
         ask.fr = "Logo"
         type = "url"
 		bind = "organization.owner.logo:"
@@ -161,13 +161,13 @@ services = []
     # help = ""
 	optional = true
 
-        [main.location.country-name]
+        [main.location.country_name]
         ask.fr = "Pays de l'organisation"
         type = "string"
 		bind = "organization.country.name:"
 		optional = false
 
-        [main.location.country-code]
+        [main.location.country_code]
         ask.fr = "Code pays de l'organisation"
 		help = "Table ISO 3166-1 alpha-2 : https://fr.wikipedia.org/wiki/ISO_3166-1#Table_de_codage"
         type = "string"
@@ -396,28 +396,28 @@ bind = ":{{ install_dir }}/public/{{ app }}.properties"
         type = "url"
 		bind = "service.logo:"
 
-        [{{ app }}.service.{{ app }}_legal-url]
+        [{{ app }}.service.{{ app }}_legal_url]
         ask.fr = "Mentions légales"
         type = "url"
 		bind = "service.legal.url:"
 
-        [{{ app }}.service.{{ app }}_guide-technical]
+        [{{ app }}.service.{{ app }}_guide_technical]
         ask.fr = "Documentation technique"
         type = "url"
 		bind = "service.guide.technical:"
 
-        [{{ app }}.service.{{ app }}_guide-user]
+        [{{ app }}.service.{{ app }}_guide_user]
         ask.fr = "Documentation utilisateurices"
         type = "url"
 		bind = "service.guide.user:"
 
-        [{{ app }}.service.{{ app }}_contact-url]
+        [{{ app }}.service.{{ app }}_contact_url]
         ask.fr = "Page de support"
         type = "url"
 		bind = "service.contact.url:"
         optional = true
 
-        [{{ app }}.service.{{ app }}_contact-email]
+        [{{ app }}.service.{{ app }}_contact_email]
         ask.fr = "Courriel de support"
         type = "email"
 		bind = "service.contact.email:"
@@ -432,7 +432,7 @@ bind = ":{{ install_dir }}/public/{{ app }}.properties"
         choices.Client = "Inscription liée à une relation commerciale (facture…)" 
 		bind = "service.registration:"
 
-        [{{ app }}.service.{{ app }}_registration-load]
+        [{{ app }}.service.{{ app }}_registration_load]
         ask.fr = "Capacité"
         type = "select"
 		choices.OPEN = "Le service accueille de nouveaux comptes"
