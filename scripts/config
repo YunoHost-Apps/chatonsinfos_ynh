@@ -74,7 +74,7 @@ ynh_app_config_apply() {
     # Update date of properties files
     local date=$(date '+%Y-%m-%dT%H:%M:%S')
     ynh_write_var_in_file --file="$install_dir/public/organization.properties" --key="file.datetime" --value="$date"
-    local apps=$(yunohost app list | grep "id\:" | sed "s/ *id: //g")
+    local apps=$(yunohost app list | grep "id\:" | sed "s/ *id: //g" | grep -v chatonsinfos)
     for _app_id in $apps
     do
         ynh_write_var_in_file --file="$install_dir/public/$_app_id.properties" --key="file.datetime" --value="$date"

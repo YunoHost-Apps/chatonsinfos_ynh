@@ -88,7 +88,7 @@ create_service_properties() {
 update_subs() {
     local app_published
     local app=chatonsinfos
-    export apps=$(yunohost app list | grep "id\:" | sed "s/ *id: //g")
+    export apps=$(yunohost app list | grep "id\:" | sed "s/ *id: //g" | grep -v chatonsinfos)
     local orga_path="$install_dir/public/organization.properties"
     
     # Remove all subs 
