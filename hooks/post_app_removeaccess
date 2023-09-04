@@ -1,0 +1,22 @@
+#!/bin/bash
+
+source /etc/yunohost/apps/chatonsinfos/scripts/_common.sh
+source /usr/share/yunohost/helpers
+app=$1
+install_dir=/var/www/chatonsinfos/
+service_path=${install_dir}public/${app}.properties
+local groups_removed=$4
+local app_info="$(yunohost app info $app --full --json)"
+get_info() {
+    echo $app_info | jq -r ".$1"
+}
+if [[ "$groups_removed" == *"visitors"* ]]
+then
+    registration=$(ynh_read_var_in_file --file="$service_path" --key="service.registration")
+    local ldap="$(get_info 'manifest.integration.ldap')"
+    local sso="$(get_info 'manifest.integration.sso')"
+    if [[ "$registration" != "Member"  &&  "$registration" != "Client" ]]
+    then
+        ynh_write_var_in_file --file="$service_path" --key="service.registration" --value="Member"
+    fi
+fi
