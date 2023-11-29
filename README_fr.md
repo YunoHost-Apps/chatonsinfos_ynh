@@ -32,7 +32,7 @@ ChatonsInfos est un protocole de partage de données sur le collectif CHATONS, s
 * Site officiel de l’app : <https://framagit.org/chatons/chatonsinfos/-/blob/master/>
 * Documentation officielle de l’admin : <https://framagit.org/chatons/chatonsinfos/-/blob/master/README.md>
 * Dépôt de code officiel de l’app : <https://framagit.org/chatons/chatonsinfos>
-* Documentation YunoHost pour cette app : <https://yunohost.org/app_chatonsinfos>
+* YunoHost Store: <https://apps.yunohost.org/app/chatonsinfos>
 * Signaler un bug : <https://github.com/YunoHost-Apps/chatonsinfos_ynh/issues>
 
 ## Informations pour les développeurs
