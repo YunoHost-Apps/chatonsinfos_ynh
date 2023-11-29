@@ -3,9 +3,9 @@
 source /etc/yunohost/apps/chatonsinfos/scripts/_common.sh
 source /usr/share/yunohost/helpers
 
-[ "${YNH_APP_ID}" == "chatonsinfos" ] && exit 0
+[ "${YNH_APP_INSTANCE_NAME}" == "chatonsinfos" ] && exit 0
 
 install_dir=/var/www/chatonsinfos/
-ynh_secure_remove --file="$install_dir/public/${YNH_APP_ID}.properties"
+ynh_secure_remove --file="$install_dir/public/${YNH_APP_INSTANCE_NAME}.properties"
 
-sed -i "/^subs\.${YNH_APP_ID} =/d" "$install_dir/public/organization.properties"
+sed -i "/^subs\.${YNH_APP_INSTANCE_NAME} =/d" "$install_dir/public/organization.properties"
