@@ -1,6 +1,9 @@
 #!/bin/bash
 
 source /usr/share/yunohost/helpers
+
+[ "${YNH_APP_INSTANCE_NAME}" == "chatonsinfos" ] && exit 0
+
 properties_path="/var/www/chatonsinfos/public/${YNH_APP_INSTANCE_NAME}.properties"
 ynh_write_var_in_file --file="$properties_path" --key="service.website" --value="https://$YNH_APP_NEW_DOMAIN/$YNH_APP_NEW_PATH"
 ynh_write_var_in_file --file="$properties_path" --key="file.datetime" --value="$(date '+%Y-%m-%dT%H:%M:%S')"
