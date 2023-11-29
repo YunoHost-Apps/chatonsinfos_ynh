@@ -3,6 +3,9 @@
 source /etc/yunohost/apps/chatonsinfos/scripts/_common.sh
 source /usr/share/yunohost/helpers
 app=$1
+
+[ "${app}" == "chatonsinfos" ] && exit 0
+
 install_dir=/var/www/chatonsinfos/
 service_path=${install_dir}public/${app}.properties
 local groups_added=$4
