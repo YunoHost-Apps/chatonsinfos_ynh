@@ -29,7 +29,6 @@ ChatonsInfos is a protocol for sharing data about the CHATONS collective, its me
 
 ## Documentation and resources
 
-* Official app website: <https://framagit.org/chatons/chatonsinfos/-/blob/master/>
 * Official admin documentation: <https://framagit.org/chatons/chatonsinfos/-/blob/master/README.md>
 * Upstream app code repository: <https://framagit.org/chatons/chatonsinfos>
 * YunoHost Store: <https://apps.yunohost.org/app/chatonsinfos>
