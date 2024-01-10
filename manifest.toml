@@ -16,11 +16,14 @@ admindoc = "https://framagit.org/chatons/chatonsinfos/-/blob/master/README.md"
 code = "https://framagit.org/chatons/chatonsinfos"
 
 [integration]
-yunohost = ">= 11.1.0"
+yunohost = ">= 11.2"
 architectures = "all"
 multi_instance = false
+
 ldap = "not_relevant"
+
 sso = "not_relevant"
+
 disk = "50M"
 ram.build = "50M"
 ram.runtime = "50M"
