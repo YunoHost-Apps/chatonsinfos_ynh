@@ -10,9 +10,7 @@ version = "1.0~ynh1"
 maintainers = ["oiseauroch", "ljf"]
 
 [upstream]
-# NB: Only the "license" key is mandatory. Remove entries for which there's no relevant data
 license = "AGPL-3.0"
-website = "https://framagit.org/chatons/chatonsinfos/-/blob/master/"
 demo = "https://stats.chatons.org/index.xhtml"
 admindoc = "https://framagit.org/chatons/chatonsinfos/-/blob/master/README.md"
 code = "https://framagit.org/chatons/chatonsinfos"
@@ -29,13 +27,12 @@ ram.runtime = "50M"
 
 [install]
     [install.domain]
-    # this is a generic question - ask strings are automatically handled by YunoHost's core
     type = "domain"
 
     [install.path]
-    # this is a generic question - ask strings are automatically handled by YunoHost's core
     type = "path"
     default = "/.well_known/chatonsinfos/"
+    
 [resources]
     # See the packaging documentation for the full set
     # of explanation regarding the behavior and properties for each of those
