@@ -17,12 +17,8 @@ ynh_script_progression --message="Restoring the app main directory..." --weight=
 
 ynh_restore_file --origin_path="$install_dir"
 
-# $install_dir will automatically be initialized with some decent 
-# permission by default ... however, you may need to recursively reapply
-# ownership to all files such as after the ynh_setup_source step
 chown -R root:root "$install_dir/sources"
 chown -R $app:www-data "$install_dir/public"
-
 
 #=================================================
 # RESTORE SYSTEM CONFIGURATIONS
@@ -30,7 +26,6 @@ chown -R $app:www-data "$install_dir/public"
 # RESTORE THE PHP-FPM CONFIGURATION
 #=================================================
 ynh_script_progression --message="Restoring system configurations related to $app..." --weight=1
-
 
 ynh_restore_file --origin_path="/etc/nginx/conf.d/$domain.d/$app.conf"
 ynh_restore_file --origin_path="/etc/cron.daily/$app"

@@ -5,37 +5,37 @@ name = "Chatons Infos"
 description.en = "Create stats files Chatons compliant and enable configuration in config pannel"
 description.fr = "Génère automatiquement les fichiers de statistiques Chatons et permet leur configuration dans le panneau de configuration"
 
-version = "1.0~ynh1"
+version = "1.0~ynh2"
 
 maintainers = ["oiseauroch", "ljf"]
 
 [upstream]
-# NB: Only the "license" key is mandatory. Remove entries for which there's no relevant data
 license = "AGPL-3.0"
-website = "https://framagit.org/chatons/chatonsinfos/-/blob/master/"
 demo = "https://stats.chatons.org/index.xhtml"
 admindoc = "https://framagit.org/chatons/chatonsinfos/-/blob/master/README.md"
 code = "https://framagit.org/chatons/chatonsinfos"
 
 [integration]
-yunohost = ">= 11.1.0"
+yunohost = ">= 11.2"
 architectures = "all"
 multi_instance = false
+
 ldap = "not_relevant"
+
 sso = "not_relevant"
+
 disk = "50M"
 ram.build = "50M"
 ram.runtime = "50M"
 
 [install]
     [install.domain]
-    # this is a generic question - ask strings are automatically handled by YunoHost's core
     type = "domain"
 
     [install.path]
-    # this is a generic question - ask strings are automatically handled by YunoHost's core
     type = "path"
     default = "/.well_known/chatonsinfos/"
+    
 [resources]
     # See the packaging documentation for the full set
     # of explanation regarding the behavior and properties for each of those
@@ -44,7 +44,7 @@ ram.runtime = "50M"
     
     [resources.sources.main]
     url = "https://framagit.org/chatons/chatonsinfos/-/archive/master/chatonsinfos-master.tar.gz?path=MODELES"
-    sha256 = "664e1c934ea2fd0b5ee4ff55bbabbc81227a256ee12fd7d18319d13c095690bb"
+    sha256 = "d9853b736128e862c3af2a8d7d5073df1c4c80c240e1afac859530c58d39b82e"
     format = "tar.gz"
     in_subdir = true
     

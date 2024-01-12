@@ -19,7 +19,7 @@ Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) po
 ChatonsInfos est un protocole de partage de données sur le collectif CHATONS, ses membres et leurs services.
 
 
-**Version incluse :** 1.0~ynh1
+**Version incluse :** 1.0~ynh2
 
 **Démo :** https://stats.chatons.org/index.xhtml
 
@@ -29,7 +29,6 @@ ChatonsInfos est un protocole de partage de données sur le collectif CHATONS, s
 
 ## Documentations et ressources
 
-* Site officiel de l’app : <https://framagit.org/chatons/chatonsinfos/-/blob/master/>
 * Documentation officielle de l’admin : <https://framagit.org/chatons/chatonsinfos/-/blob/master/README.md>
 * Dépôt de code officiel de l’app : <https://framagit.org/chatons/chatonsinfos>
 * YunoHost Store: <https://apps.yunohost.org/app/chatonsinfos>
