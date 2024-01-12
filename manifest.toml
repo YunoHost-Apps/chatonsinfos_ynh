@@ -5,7 +5,7 @@ name = "Chatons Infos"
 description.en = "Create stats files Chatons compliant and enable configuration in config pannel"
 description.fr = "Génère automatiquement les fichiers de statistiques Chatons et permet leur configuration dans le panneau de configuration"
 
-version = "1.0~ynh1"
+version = "1.0~ynh2"
 
 maintainers = ["oiseauroch", "ljf"]
 
@@ -44,7 +44,7 @@ ram.runtime = "50M"
     
     [resources.sources.main]
     url = "https://framagit.org/chatons/chatonsinfos/-/archive/master/chatonsinfos-master.tar.gz?path=MODELES"
-    sha256 = "664e1c934ea2fd0b5ee4ff55bbabbc81227a256ee12fd7d18319d13c095690bb"
+    sha256 = "d9853b736128e862c3af2a8d7d5073df1c4c80c240e1afac859530c58d39b82e"
     format = "tar.gz"
     in_subdir = true
     
