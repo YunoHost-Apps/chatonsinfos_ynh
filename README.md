@@ -19,7 +19,7 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 ChatonsInfos is a protocol for sharing data about the CHATONS collective, its members and their services.
 
 
-**Shipped version:** 1.0~ynh2
+**Shipped version:** 2023.12.21~ynh1
 
 **Demo:** https://stats.chatons.org/index.xhtml
 
