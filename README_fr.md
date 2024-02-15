@@ -19,7 +19,7 @@ Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) po
 ChatonsInfos est un protocole de partage de données sur le collectif CHATONS, ses membres et leurs services.
 
 
-**Version incluse :** 1.0~ynh2
+**Version incluse :** 2023.12.21~ynh1
 
 **Démo :** https://stats.chatons.org/index.xhtml
 
