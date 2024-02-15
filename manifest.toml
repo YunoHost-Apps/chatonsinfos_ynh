@@ -47,6 +47,7 @@ ram.runtime = "50M"
     sha256 = "d9853b736128e862c3af2a8d7d5073df1c4c80c240e1afac859530c58d39b82e"
     format = "tar.gz"
     in_subdir = true
+    autoupdate.strategy = "latest_gitlab_commit"
     
     [resources.system_user]
     # This will provision/deprovision a unix system user
