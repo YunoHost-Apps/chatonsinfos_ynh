@@ -18,10 +18,6 @@ Create stats files Chatons compliant and enable configuration in config pannel
 <a href="https://github.com/YunoHost-Apps/chatonsinfos_ynh/issues"><img height="100px" src="https://github.com/YunoHost/yunohost-artwork/raw/refs/heads/main/badges/neopossum-badges/badge_report_an_issue.svg"/></a>
 </div>
 
-
-## Screenshots
-![Screenshot of Chatons Infos](./doc/screenshots/example.jpg)
-
 ## 📦 Developer info
 
 [![Automatic tests level](https://apps.yunohost.org/badge/cilevel/chatonsinfos)](https://ci-apps.yunohost.org/ci/apps/chatonsinfos/)
