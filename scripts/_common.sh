@@ -6,7 +6,7 @@
 
 generate_config_panel() {
     export apps=$(yunohost app list | grep "id\:" | sed "s/ *id: //g" | grep -v __APP__ | tr '\n' ',' | sed "s/,$//")
-    ynh_config_add --jinja config_panel.toml.j2 /etc/yunohost/apps/__APP__/config_panel.toml
+    ynh_config_add --jinja --template="config_panel.toml.j2" --destination="/etc/yunohost/apps/__APP__/config_panel.toml"
 
     create_service_properties
 }
