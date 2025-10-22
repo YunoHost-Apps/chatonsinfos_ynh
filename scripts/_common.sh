@@ -5,15 +5,15 @@
 #=================================================
 
 generate_config_panel() {
-    export apps=$(yunohost app list | grep "id\:" | sed "s/ *id: //g" | grep -v chatonsinfos | tr '\n' ',' | sed "s/,$//")
-    ynh_config_add --jinja /etc/yunohost/apps/chatonsinfos/conf/config_panel.toml.j2 /etc/yunohost/apps/chatonsinfos/config_panel.toml
+    export apps=$(yunohost app list | grep "id\:" | sed "s/ *id: //g" | grep -v __APP__ | tr '\n' ',' | sed "s/,$//")
+    ynh_config_add --jinja config_panel.toml.j2 /etc/yunohost/apps/__APP__/config_panel.toml
 
     create_service_properties
 }
 
 create_service_properties() {
-    local app=chatonsinfos
-    export apps=$(yunohost app list | grep "id\:" | sed "s/ *id: //g" | grep -v chatonsinfos)
+    local app=__APP__
+    export apps=$(yunohost app list | grep "id\:" | sed "s/ *id: //g" | grep -v __APP__)
     for _app_id in $apps ;
     do
         _app=${_app_id%__*}
