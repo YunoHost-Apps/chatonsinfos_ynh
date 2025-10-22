@@ -15,8 +15,6 @@ chown -R root:root "$install_dir/sources"
 chown -R $app:www-data "$install_dir/public"
 
 #=================================================
-# RESTORE SYSTEM CONFIGURATIONS
-#=================================================
 # RESTORE THE PHP-FPM CONFIGURATION
 #=================================================
 ynh_script_progression "Restoring system configurations related to $app..."
