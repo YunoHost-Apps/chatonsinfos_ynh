@@ -5,14 +5,14 @@
 #=================================================
 
 generate_config_panel() {
-    export apps=$(yunohost app list | grep "id\:" | sed "s/ *id: //g" | grep -v __APP__ | tr '\n' ',' | sed "s/,$//")
-    ynh_config_add --jinja --template="config_panel.toml.j2" --destination="/etc/yunohost/apps/__APP__/config_panel.toml"
+    export apps=$(yunohost app list | grep "id\:" | sed "s/ *id: //g" | grep -v $app | tr '\n' ',' | sed "s/,$//")
+    ynh_config_add --jinja --template="config_panel.toml.j2" --destination="/etc/yunohost/apps/$app/config_panel.toml"
 
     create_service_properties
 }
 
 create_service_properties() {
-    local app=__APP__
+    local app=$app
     export apps=$(yunohost app list | grep "id\:" | sed "s/ *id: //g" | grep -v __APP__)
     for _app_id in $apps ;
     do
