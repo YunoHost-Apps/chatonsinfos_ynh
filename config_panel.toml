@@ -10,7 +10,7 @@ services = []
 [main.organization]
 name = ""
 
-[main.organization._name]
+[main.organization.orga_name]
         ask.en = "Nom de l'oganisation"
         type = "string"
 		bind = "organization.name>/var/www/__APP__/public/organization.properties"
