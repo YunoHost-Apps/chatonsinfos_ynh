@@ -1,22 +1,19 @@
 #!/bin/bash
 
 #=================================================
-# COMMON VARIABLES
+# COMMON VARIABLES AND CUSTOM HELPERS
 #=================================================
 
-#=================================================
-# PERSONAL HELPERS
-#=================================================
 generate_config_panel() {
-    export apps=$(yunohost app list | grep "id\:" | sed "s/ *id: //g" | grep -v chatonsinfos | tr '\n' ',' | sed "s/,$//")
-    ynh_render_template /etc/yunohost/apps/chatonsinfos/conf/config_panel.toml.j2 /etc/yunohost/apps/chatonsinfos/config_panel.toml
+    export apps=$(yunohost app list | grep "id\:" | sed "s/ *id: //g" | grep -v $app | tr '\n' ',' | sed "s/,$//")
+    ynh_config_add --jinja --template="config_panel.toml.j2" --destination="/etc/yunohost/apps/$app/config_panel.toml"
 
     create_service_properties
 }
 
 create_service_properties() {
-    local app=chatonsinfos
-    export apps=$(yunohost app list | grep "id\:" | sed "s/ *id: //g" | grep -v chatonsinfos)
+    local app=$app
+    export apps=$(yunohost app list | grep "id\:" | sed "s/ *id: //g" | grep -v __APP__)
     for _app_id in $apps ;
     do
         _app=${_app_id%__*}
@@ -31,7 +28,7 @@ create_service_properties() {
             cp "$source_path" "$service_path"
 
             # Prefill the properties
-            ynh_print_info --message="Filling '$service_path'"
+            ynh_print_info "Filling '$service_path'"
             local app_info="$(yunohost app info $_app_id --full --json)"
             get_info() {
                 echo $app_info | jq -r ".$1"
@@ -74,7 +71,7 @@ create_service_properties() {
             for config_key in host.name host.description host.server.distribution host.server.type host.provider.type host.provider.hypervisor host.country.name host.country.code
             do
                 settings=${config_key//\./_}
-                local value=$(ynh_app_setting_get --app=$app --key=$settings)
+                local value=$(ynh_app_setting_get --key=$settings)
                 ynh_write_var_in_file --file="$service_path" --key="$config_key" --value="$value"
             done
         fi
@@ -90,14 +87,15 @@ update_subs() {
     local app=chatonsinfos
     export apps=$(yunohost app list | grep "id\:" | sed "s/ *id: //g" | grep -v chatonsinfos)
     local orga_path="$install_dir/public/organization.properties"
-    
-    # Remove all subs 
+
+    # Remove all subs
+
     sed -i "/^subs\..* =/d" "$orga_path"
-    
+
     # Add a subs for each published apps
     for subs_app_id in $apps
     do
-        local app_published=$(ynh_app_setting_get --app=$app --key=${subs_app_id}_published)
+        local app_published=$(ynh_app_setting_get --key=${subs_app_id}_published)
         if [ "$app_published" == "" ]
         then
             sed -i "/\[Subs\]/a \
@@ -106,7 +104,7 @@ subs.${subs_app_id} = 'https://$domain$path/${subs_app_id}.properties'" "$orga_p
     done
 
     # Add external subs
-    local external_subs=$(ynh_app_setting_get --app=$app --key=external_subs | sed "s/,/ /g")
+    local external_subs=$(ynh_app_setting_get --key=external_subs | sed "s/,/ /g")
     for external_sub in $external_subs
     do
         local subs_app_id=${external_sub%*:}
@@ -118,11 +116,3 @@ subs.${subs_app_id} = '${subs_url}'" "$orga_path"
 
     ynh_write_var_in_file --file="$orga_path" --key="file.datetime" --value="$(date '+%Y-%m-%dT%H:%M:%S')"
 }
-
-#=================================================
-# EXPERIMENTAL HELPERS
-#=================================================
-
-#=================================================
-# FUTURE OFFICIAL HELPERS
-#=================================================
